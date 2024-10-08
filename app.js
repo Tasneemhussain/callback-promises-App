@@ -35,14 +35,30 @@ const RandomJoke = async () => {
 };
 
 // funtion for Event listener for the button
-document.getElementById("flipButton").addEventListener("click", () => {
+document.getElementById("flipButton").addEventListener("click", async () => {
   const resultDiv = document.getElementById("result");
   const extraMessageDiv = document.getElementById("extraMessage");
   resultDiv.textContent = ""; // Clear previous result
   extraMessageDiv.textContent = ""; // Clear previous text message
 
-  flipCoin()
-    .then((message) => {
+  flipCoin();
+  try {
+    const message = await flipCoin(); // Await the result of the coin flip
+    resultDiv.textContent = message;
+    resultDiv.style.color = "green"; // Change text color to green for success
+
+    const joke = await RandomJoke(); // Await the result of the  Random joke
+    extraMessageDiv.textContent = `Here is a Joke for you ..${joke}`;
+    extraMessageDiv.style.color = "green"; // Change text color to green for success
+  } catch (error) {
+    resultDiv.textContent = message;
+    resultDiv.style.color = "red"; // Change text color to red for failure
+
+    const advice = await RandomJoke();
+    extraMessageDiv.textContent = `Here is a piece of advice for you ..${advice}`;
+    extraMessageDiv.style.color = "red";
+  }
+  /*.then((message) => {
       resultDiv.textContent = message;
       resultDiv.style.color = "green"; // Change text color to green for success
       return RandomJoke();
@@ -61,7 +77,7 @@ document.getElementById("flipButton").addEventListener("click", () => {
         extraMessageDiv.textContent = `Here is a piece of advice for you ..${advice}`;
         extraMessageDiv.style.color = "red";
       }
-    });
+    });*/
 });
 
 // weather api function
