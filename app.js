@@ -38,7 +38,7 @@ document.getElementById("flipButton").addEventListener("click", () => {
       return RandomJoke();
     })
     .then((joke) => {
-      extraMessageDiv.textContent = `Here is a Joke for you ${joke}`;
+      extraMessageDiv.textContent = `Here is a Joke for you ..${joke}`;
       extraMessageDiv.style.color = "green";
     })
     .catch((message) => {
@@ -48,7 +48,7 @@ document.getElementById("flipButton").addEventListener("click", () => {
     })
     .then((advice) => {
       if (advice) {
-        extraMessageDiv.textContent = `Here is a piece of advice for you ${advice}`;
+        extraMessageDiv.textContent = `Here is a piece of advice for you ..${advice}`;
         extraMessageDiv.style.color = "red";
       }
     });
